@@ -1,0 +1,180 @@
+{
+	"info": {
+		"_postman_id": "4b7b1a2a-3c05-4ca8-b872-529c24b1e763",
+		"name": "Modulexxx",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "获取菜单",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://example.com/api/goods",
+					"protocol": "http",
+					"host": [
+						"example",
+						"com"
+					],
+					"path": [
+						"api",
+						"goods"
+					]
+				},
+				"description": "获取菜品"
+			},
+			"response": [
+				{
+					"name": "200",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://example.com/api/goods",
+							"protocol": "http",
+							"host": [
+								"example",
+								"com"
+							],
+							"path": [
+								"api",
+								"goods"
+							]
+						}
+					},
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "max-age=604800"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/html; charset=UTF-8"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 13 Oct 2020 12:48:39 GMT"
+						},
+						{
+							"key": "Expires",
+							"value": "Tue, 20 Oct 2020 12:48:39 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "EOS (vny/044F)"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "Content-Length",
+							"value": "648"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\":200,\n    \"msg\":\"success\",\n    \"data\":[\n        {\n            \"id\":1,\n            \"image_url\":\"http://example.com/iamges/sadf876adsf.jpg\",\n            \"name\":\"鱼香茄子\",\n            \"price\":35\n        },\n        {\n            \"id\":2,\n            \"image_url\":\"http://example.com/iamges/sadf876adsf.jpg\",\n            \"name\":\"客家豆腐煲\",\n            \"price\":45\n        },\n        .....\n    ]\n\n}"
+				}
+			]
+		},
+		{
+			"name": "支付",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"cart\":[\n        {\n            \"food_id\":1,\n            \"count\":2 //2份\n        },\n        {\n            \"food_id\":2,\n            \"count\":3 //3份\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://example.com/payment",
+					"protocol": "http",
+					"host": [
+						"example",
+						"com"
+					],
+					"path": [
+						"payment"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "200",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"cart\":[\n        {\n            \"food_id\":1,\n            \"count\":2 //2份\n        },\n        {\n            \"food_id\":2,\n            \"count\":3 //3份\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://example.com/payment",
+							"protocol": "http",
+							"host": [
+								"example",
+								"com"
+							],
+							"path": [
+								"payment"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"code\":200,\n    \"msg\":\"success\"\n}"
+				},
+				{
+					"name": "422",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"cart\":[\n        {\n            \"food_id\":1,\n            \"count\":2 //2份\n        },\n        {\n            \"food_id\":2\n            //缺少数量\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://example.com/payment",
+							"protocol": "http",
+							"host": [
+								"example",
+								"com"
+							],
+							"path": [
+								"payment"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"code\": 422,\n    \"msg\": \"something wrong\"\n}"
+				}
+			]
+		}
+	],
+	"protocolProfileBehavior": {}
+}

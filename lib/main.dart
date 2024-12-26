@@ -25,7 +25,7 @@ class _MyAppState extends State<MyApp> {
   // 定义路由表，用于页面导航
   final Map<String, Widget> routes = {
     "/": const LoginPage(), // 主页面映射到 LoginPage 组件
-    "/tabs": const Tabs()
+    "/tabs": const Tabs(),
   };
 
   @override

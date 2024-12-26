@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:min_shop_app/module/data.dart';
+import 'package:min_shop_app/pages/booking_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -30,11 +31,31 @@ class _HomePageState extends State<HomePage> {
         userImg: 'assets/guidao10.jpeg'),
   ];
 
-  final List<String> carImages = [
-    'assets/bmw_car_img.png',
-    'assets/bmw_car_img_black.png',
-    'assets/bmw_car_img_red.jpg',
-    'assets/bmw_car_img_sliver.jpg',
+  final List<CarData> carImages = [
+    CarData(
+        name: 'BMW X4 Sports',
+        imagePath: 'assets/bmw_car_img.png',
+        description: '2019 · Comfort Class',
+        pricePerDay: 210,
+        rating: 4.8),
+    CarData(
+        name: 'BMW X4 Sports',
+        imagePath: 'assets/bmw_car_img_black.png',
+        description: '2019 · Comfort Class',
+        pricePerDay: 210,
+        rating: 4.8),
+    CarData(
+        name: 'BMW X4 Sports',
+        imagePath: 'assets/bmw_car_img_red.jpg',
+        description: '2019 · Comfort Class',
+        pricePerDay: 210,
+        rating: 4.8),
+    CarData(
+        name: 'BMW X4 Sports',
+        imagePath: 'assets/bmw_car_img_sliver.jpg',
+        description: '2019 · Comfort Class',
+        pricePerDay: 210,
+        rating: 4.8),
   ];
   List titleList = ["EXPLORE", "CARS", "TRUCKS", "SCOOTERS"];
   int titleIndex = 0;
@@ -153,15 +174,14 @@ class _HomePageState extends State<HomePage> {
           Container(
               height: 340,
               child: Padding(
-                padding: EdgeInsets.all(10),
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: [
-                    for (var i = 0; i < carImages.length; i++)
-                      CarCard(imagePath: carImages[i])
-                  ],
-                ),
-              )),
+                  padding: EdgeInsets.all(10),
+                  child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: carImages.length,
+                      itemBuilder: (context, index) {
+                        final car = carImages[index];
+                        return CarCard(car: car);
+                      }))),
           Container(
               height: 300,
               child: Column(
@@ -292,235 +312,18 @@ class _HomePageState extends State<HomePage> {
                   child: Container(
                     height: 280,
                     // decoration: BoxDecoration(color: Colors.blue),
-                    child: ListView(
-                      scrollDirection: Axis.vertical,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Card(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10)),
-                              color: Colors.white,
-                              child: Column(
-                                children: [
-                                  Container(
-                                    width: 190,
-                                    height: 260,
-                                    child: Stack(
-                                      clipBehavior: Clip.none,
-                                      children: [
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Container(
-                                              width: 200,
-                                              height: 120,
-                                              decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.only(
-                                                    topLeft:
-                                                        Radius.circular(10),
-                                                    topRight:
-                                                        Radius.circular(10),
-                                                  ),
-                                                  image: DecorationImage(
-                                                      image: AssetImage(
-                                                          'assets/guidao7.jpeg'),
-                                                      fit: BoxFit.cover)),
-                                            ),
-                                            Padding(
-                                              padding: EdgeInsets.only(
-                                                  top: 30, left: 5),
-                                              child: Text(
-                                                'BWM M5 G-Power',
-                                                style: TextStyle(
-                                                    fontSize: 16,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding: EdgeInsets.only(left: 5),
-                                              child: Text(
-                                                'Tel-Aviv, israel',
-                                                style: TextStyle(
-                                                    fontSize: 14,
-                                                    color: Colors.grey),
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding: EdgeInsets.only(
-                                                  left: 5, right: 5, top: 15),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Container(
-                                                      height: 40,
-                                                      width: 120,
-                                                      child: Row(
-                                                        children: [
-                                                          Container(
-                                                            width: 35,
-                                                            height: 35,
-                                                            child: Image.asset(
-                                                                'assets/bookmark.png'),
-                                                          ),
-                                                          Container(
-                                                            width: 40,
-                                                            height: 40,
-                                                            child: Icon(
-                                                                Icons.timeline),
-                                                          ),
-                                                        ],
-                                                      )),
-                                                  Container(
-                                                    width: 40,
-                                                    height: 40,
-                                                    child:
-                                                        Icon(Icons.more_horiz),
-                                                  )
-                                                ],
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        Positioned(
-                                            top: 98,
-                                            child: Padding(
-                                              padding: EdgeInsets.only(
-                                                  left: 5, right: 5),
-                                              child: Row(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Container(
-                                                    width: 40,
-                                                    height: 40,
-                                                    decoration:
-                                                        const BoxDecoration(
-                                                      shape: BoxShape.circle,
-                                                    ),
-                                                    child: const CircleAvatar(
-                                                      backgroundImage: AssetImage(
-                                                          'assets/guidao10.jpeg'),
-                                                    ),
-                                                  ),
-                                                  Padding(
-                                                    padding: EdgeInsets.only(
-                                                        left: 60),
-                                                    child: Container(
-                                                      width: 80,
-                                                      height: 40,
-                                                      decoration: BoxDecoration(
-                                                          color: Colors.blue,
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      10)),
-                                                    ),
-                                                  )
-                                                ],
-                                              ),
-                                            ))
-                                      ],
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                            Card(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10)),
-                              color: Colors.white,
-                              child: Column(
-                                children: [
-                                  Container(
-                                    width: 190,
-                                    height: 260,
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Container(
-                                          width: 200,
-                                          height: 120,
-                                          decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.only(
-                                                topLeft: Radius.circular(10),
-                                                topRight: Radius.circular(10),
-                                              ),
-                                              image: DecorationImage(
-                                                  image: AssetImage(
-                                                      'assets/guidao7.jpeg'),
-                                                  fit: BoxFit.cover)),
-                                        ),
-                                        Padding(
-                                          padding:
-                                              EdgeInsets.only(top: 30, left: 5),
-                                          child: Text(
-                                            'BWM M5 G-Power',
-                                            style: TextStyle(
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: EdgeInsets.only(left: 5),
-                                          child: Text(
-                                            'Tel-Aviv, israel',
-                                            style: TextStyle(
-                                                fontSize: 14,
-                                                color: Colors.grey),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                              left: 5, right: 5, top: 15),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Container(
-                                                  height: 40,
-                                                  width: 120,
-                                                  child: Row(
-                                                    children: [
-                                                      Container(
-                                                        width: 35,
-                                                        height: 35,
-                                                        child: Image.asset(
-                                                            'assets/bookmark.png'),
-                                                      ),
-                                                      Container(
-                                                        width: 40,
-                                                        height: 40,
-                                                        child: Icon(
-                                                            Icons.timeline),
-                                                      ),
-                                                    ],
-                                                  )),
-                                              Container(
-                                                width: 40,
-                                                height: 40,
-                                                child: Icon(Icons.more_horiz),
-                                              )
-                                            ],
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  )
-                                ],
-                              ),
-                            )
-                          ],
-                        )
-                      ],
-                    ),
+                    child: GridView.builder(
+                        shrinkWrap: true,
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            crossAxisSpacing: 5,
+                            mainAxisSpacing: 5,
+                            childAspectRatio: 0.73),
+                        itemCount: carItems.length,
+                        itemBuilder: (context, index) {
+                          final car = carItems[index];
+                          return CarItemCard(car: car);
+                        }),
                   ),
                 )
               ],
@@ -532,10 +335,139 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-class CarCard extends StatelessWidget {
-  final String imagePath;
+class CarItemCard extends StatelessWidget {
+  final Data car;
 
-  const CarCard({super.key, required this.imagePath});
+  const CarItemCard({super.key, required this.car});
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      color: Colors.white,
+      child: Column(
+        children: [
+          Container(
+            width: 190,
+            height: 260,
+            child: Stack(
+              clipBehavior: Clip.none,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      width: 200,
+                      height: 120,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(10),
+                            topRight: Radius.circular(10),
+                          ),
+                          image: DecorationImage(
+                              image: AssetImage(car.carImg),
+                              fit: BoxFit.cover)),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: 30, left: 5),
+                      child: Text(
+                        car.carName,
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(left: 5),
+                      child: Text(
+                        'Tel-Aviv, israel',
+                        style: TextStyle(fontSize: 14, color: Colors.grey),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(left: 5, right: 5, top: 15),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                              height: 40,
+                              width: 120,
+                              child: Row(
+                                children: [
+                                  Container(
+                                    width: 35,
+                                    height: 35,
+                                    child: Image.asset('assets/bookmark.png'),
+                                  ),
+                                  Container(
+                                    width: 40,
+                                    height: 40,
+                                    child: Icon(Icons.timeline),
+                                  ),
+                                ],
+                              )),
+                          Container(
+                            width: 40,
+                            height: 40,
+                            child: Icon(Icons.more_horiz),
+                          )
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+                Positioned(
+                    top: 98,
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 5, right: 5),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            width: 40,
+                            height: 40,
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                            ),
+                            child: CircleAvatar(
+                              backgroundImage: AssetImage(car.userImg),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(left: 60),
+                            child: Container(
+                                width: 80,
+                                height: 40,
+                                decoration: BoxDecoration(
+                                    color: Colors.blue,
+                                    borderRadius: BorderRadius.circular(10)),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      '\$200/day',
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 16),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ],
+                                )),
+                          )
+                        ],
+                      ),
+                    ))
+              ],
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class CarCard extends StatelessWidget {
+  final CarData car;
+
+  const CarCard({super.key, required this.car});
 
   @override
   Widget build(BuildContext context) {
@@ -549,8 +481,8 @@ class CarCard extends StatelessWidget {
             padding: EdgeInsets.only(top: 10, left: 10, right: 10),
             child: Row(
               children: [
-                const Text(
-                  'BMW X4 Sports',
+                Text(
+                  car.name,
                   style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                 ),
                 Container(
@@ -560,12 +492,12 @@ class CarCard extends StatelessWidget {
                   decoration: BoxDecoration(
                       color: const Color(0xfff5eecf),
                       borderRadius: BorderRadius.circular(10)),
-                  child: const Row(
+                  child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Icon(Icons.star, color: Color(0xFFF6DA3C)),
                       Text(
-                        '4.5',
+                        car.rating.toString(),
                         style: TextStyle(
                             fontSize: 22,
                             fontWeight: FontWeight.bold,
@@ -580,7 +512,7 @@ class CarCard extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(left: 10, right: 10),
             child: Text(
-              '2019·COMFORT CLASS',
+              car.description,
               style: TextStyle(fontSize: 16, color: Colors.grey),
             ),
           ),
@@ -628,7 +560,7 @@ class CarCard extends StatelessWidget {
             child: Container(
               height: 140,
               width: 300,
-              child: Image.asset(imagePath),
+              child: Image.asset(car.imagePath),
             ),
           ),
           Padding(
@@ -638,10 +570,10 @@ class CarCard extends StatelessWidget {
                 Container(
                   width: 130,
                   height: 40,
-                  child: const Row(
+                  child: Row(
                     children: [
                       Text(
-                        "\$210",
+                        "\$${car.pricePerDay.toStringAsFixed(0)}",
                         style: TextStyle(
                             fontSize: 32,
                             fontWeight: FontWeight.bold,
@@ -672,7 +604,12 @@ class CarCard extends StatelessWidget {
                           shape: WidgetStateProperty.all(RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
                           ))),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => BookingPage(car: car)));
+                      },
                       child: const Text(
                         'Book Now',
                         style: TextStyle(color: Colors.white),
