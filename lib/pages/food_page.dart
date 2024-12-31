@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:min_shop_app/module/data.dart';
+import 'package:min_shop_app/pages/payment_page.dart';
 
 class FoodPage extends StatefulWidget {
   final String seatType;
@@ -35,7 +36,7 @@ class _FoodPageState extends State<FoodPage> {
   List<FoodItem> cartItems = [];
 
   double get totalAmount {
-    return foodItems.fold(0, (sum, item) => sum + item.price * item.quantity);
+    return cartItems.fold(0, (sum, item) => sum + item.price * item.quantity);
   }
 
   void _goToNextPage() {
@@ -65,63 +66,64 @@ class _FoodPageState extends State<FoodPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
-                  padding: EdgeInsets.only(left: 15),
-                  child: Icon(
-                    Icons.shopping_cart,
-                    size: 30,
-                    color: Colors.grey[700],
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      '购物车',
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
+                    IconButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      icon: Icon(Icons.close, color: Colors.grey[700]),
+                    ),
+                  ],
                 ),
                 Divider(),
                 Expanded(
-                    child: cartItems.isEmpty
-                        ? Center(
-                            child: Text(
-                              '购物车为空',
-                              style:
-                                  TextStyle(color: Colors.grey, fontSize: 16),
-                            ),
-                          )
-                        : ListView.builder(
-                            itemCount: cartItems.length,
-                            itemBuilder: (context, index) {
-                              final item = cartItems[index];
-                              return ListTile(
-                                leading: Image.asset(
-                                  item.image,
-                                  width: 80,
-                                  height: 50,
-                                  fit: BoxFit.cover,
-                                ),
-                                title: Text(item.name),
-                                subtitle: Text(
-                                  '¥${item.price} x ${item.quantity}',
-                                  style: TextStyle(color: Colors.grey),
-                                ),
-                                trailing: IconButton(
-                                    style: ButtonStyle(
-                                        backgroundColor:
-                                            MaterialStateProperty.all(
-                                                Colors.white),
-                                        shape: WidgetStateProperty.all(
-                                            RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                        50)))),
-                                    onPressed: () {
-                                      setState(() {
-                                        item.quantity--;
-                                        if (item.quantity == 0) {
-                                          cartItems.remove(item);
-                                        }
-                                      });
-                                      Navigator.pop(context);
-                                      _showCart();
-                                    },
-                                    icon: Icon(Icons.remove)),
-                              );
-                            })),
+                  child: cartItems.isEmpty
+                      ? Center(
+                          child: Text(
+                            '购物车为空，请添加商品。',
+                            style: TextStyle(color: Colors.grey, fontSize: 16),
+                          ),
+                        )
+                      : ListView.builder(
+                          itemCount: cartItems.length,
+                          itemBuilder: (context, index) {
+                            final item = cartItems[index];
+                            return ListTile(
+                              leading: Image.asset(
+                                item.image,
+                                width: 80,
+                                height: 50,
+                                fit: BoxFit.cover,
+                              ),
+                              title: Text(item.name),
+                              subtitle: Text(
+                                '¥${item.price} x ${item.quantity}',
+                                style: TextStyle(color: Colors.grey),
+                              ),
+                              trailing: IconButton(
+                                onPressed: () {
+                                  setState(() {
+                                    item.quantity--;
+                                    if (item.quantity == 0) {
+                                      cartItems.remove(item);
+                                    }
+                                  });
+                                  Navigator.pop(context);
+                                  _showCart();
+                                },
+                                icon: Icon(Icons.remove_circle_outline),
+                              ),
+                            );
+                          },
+                        ),
+                ),
                 Divider(),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -132,8 +134,31 @@ class _FoodPageState extends State<FoodPage> {
                           TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
                     ElevatedButton(
-                      onPressed: cartItems.isEmpty ? null : () {},
-                      child: Text("去支付"),
+                      style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.blue),
+                          shape: WidgetStateProperty.all(RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ))),
+                      onPressed: cartItems.isEmpty
+                          ? null
+                          : () {
+                              // 处理支付逻辑
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => PaymentPage(
+                                            cartItems: cartItems,
+                                            date: widget.date,
+                                            seatType: widget.seatType,
+                                            timeSlot: widget.timeSlot,
+                                          )));
+                            },
+                      child: Text(
+                        "去支付",
+                        style: TextStyle(
+                            color: Colors.white, fontWeight: FontWeight.bold),
+                      ),
                     ),
                   ],
                 ),
@@ -334,14 +359,35 @@ class _FoodPageState extends State<FoodPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   ElevatedButton(
-                      onPressed: () {
-                        setState(() {
-                          _showCart();
-                        });
-                      },
-                      child: Icon(
-                        Icons.shopping_cart,
-                        color: Colors.grey[700],
+                      onPressed: cartItems.isEmpty ? null : _showCart,
+                      child: Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          Icon(
+                            Icons.shopping_cart,
+                            color: cartItems.isEmpty
+                                ? Colors.grey[700]
+                                : Colors.blue,
+                          ),
+                          if (cartItems.isNotEmpty)
+                            Positioned(
+                                right: 0,
+                                top: 0,
+                                child: Container(
+                                  width: 15,
+                                  height: 15,
+                                  decoration: BoxDecoration(
+                                      color: Colors.red,
+                                      shape: BoxShape.circle),
+                                  child: Center(
+                                    child: Text(
+                                      '${cartItems.length}',
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 10),
+                                    ),
+                                  ),
+                                ))
+                        ],
                       )),
                   Text(
                     '总计:¥${totalAmount.toStringAsFixed(2)}',
