@@ -31,6 +31,9 @@ class _FoodPageState extends State<FoodPage> {
     FoodItem(name: '鱼香茄子', price: 35, image: 'assets/guidao6.jpeg'),
     FoodItem(name: '客家豆腐煲', price: 45, image: 'assets/guidao7.jpeg'),
     FoodItem(name: '宫保鸡丁', price: 50, image: 'assets/guidao8.jpeg'),
+    FoodItem(name: '鱼香茄子', price: 35, image: 'assets/guidao6.jpeg'),
+    FoodItem(name: '客家豆腐煲', price: 45, image: 'assets/guidao7.jpeg'),
+    FoodItem(name: '宫保鸡丁', price: 50, image: 'assets/guidao8.jpeg'),
   ];
 
   List<FoodItem> cartItems = [];
@@ -238,120 +241,122 @@ class _FoodPageState extends State<FoodPage> {
                         })))
               ],
             ),
-            ListView.builder(
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              itemCount: foodItems.length,
-              itemBuilder: (context, index) {
-                final item = foodItems[index];
-                return Card(
-                  margin: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-                  child: Row(
-                    children: [
-                      Container(
-                        margin: EdgeInsets.only(
-                            left: 10, top: 5, bottom: 5, right: 10),
-                        width: 100,
-                        height: 80,
-                        child: Image.asset(
-                          item.image,
-                          fit: BoxFit.cover,
+            Container(
+              height: 350,
+              child: ListView.builder(
+                shrinkWrap: true,
+                itemCount: foodItems.length,
+                itemBuilder: (context, index) {
+                  final item = foodItems[index];
+                  return Card(
+                    margin: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                    child: Row(
+                      children: [
+                        Container(
+                          margin: EdgeInsets.only(
+                              left: 10, top: 5, bottom: 5, right: 10),
+                          width: 100,
+                          height: 80,
+                          child: Image.asset(
+                            item.image,
+                            fit: BoxFit.cover,
+                          ),
                         ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(left: 10, right: 10),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              width: 240,
-                              height: 45,
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    '${item.name}',
-                                    style: TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black),
-                                  ),
-                                  Text(
-                                    '¥${item.price}',
-                                    style: TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black),
-                                  )
-                                ],
+                        Padding(
+                          padding: EdgeInsets.only(left: 10, right: 10),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                width: 240,
+                                height: 45,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      '${item.name}',
+                                      style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black),
+                                    ),
+                                    Text(
+                                      '¥${item.price}',
+                                      style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black),
+                                    )
+                                  ],
+                                ),
                               ),
-                            ),
-                            Container(
-                              width: 110,
-                              height: 25,
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  IconButton(
-                                      style: ButtonStyle(
-                                          backgroundColor:
-                                              MaterialStateProperty.all(
-                                                  Colors.white),
-                                          shape: WidgetStateProperty.all(
-                                              RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          50)))),
-                                      padding: EdgeInsets.zero,
-                                      onPressed: () {
-                                        setState(() {
-                                          if (item.quantity > 0)
-                                            item.quantity--;
-                                          if (item.quantity == 0) {
-                                            cartItems.remove(item);
-                                          }
-                                        });
-                                      },
-                                      icon: Icon(
-                                        Icons.remove,
-                                        size: 20,
-                                      )),
-                                  Text('${item.quantity}'),
-                                  IconButton(
-                                      style: ButtonStyle(
-                                          backgroundColor:
-                                              MaterialStateProperty.all(
-                                                  Colors.white),
-                                          shape: WidgetStateProperty.all(
-                                              RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          50)))),
-                                      padding: EdgeInsets.zero,
-                                      onPressed: () {
-                                        setState(() {
-                                          item.quantity++;
-                                          if (!cartItems.contains(item)) {
-                                            cartItems.add(item);
-                                          }
-                                        });
-                                      },
-                                      icon: Icon(
-                                        Icons.add,
-                                        size: 20,
-                                      ))
-                                ],
+                              Container(
+                                width: 110,
+                                height: 25,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    IconButton(
+                                        style: ButtonStyle(
+                                            backgroundColor:
+                                                MaterialStateProperty.all(
+                                                    Colors.white),
+                                            shape: WidgetStateProperty.all(
+                                                RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            50)))),
+                                        padding: EdgeInsets.zero,
+                                        onPressed: () {
+                                          setState(() {
+                                            if (item.quantity > 0)
+                                              item.quantity--;
+                                            if (item.quantity == 0) {
+                                              cartItems.remove(item);
+                                            }
+                                          });
+                                        },
+                                        icon: Icon(
+                                          Icons.remove,
+                                          size: 20,
+                                        )),
+                                    Text('${item.quantity}'),
+                                    IconButton(
+                                        style: ButtonStyle(
+                                            backgroundColor:
+                                                MaterialStateProperty.all(
+                                                    Colors.white),
+                                            shape: WidgetStateProperty.all(
+                                                RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            50)))),
+                                        padding: EdgeInsets.zero,
+                                        onPressed: () {
+                                          setState(() {
+                                            item.quantity++;
+                                            if (!cartItems.contains(item)) {
+                                              cartItems.add(item);
+                                            }
+                                          });
+                                        },
+                                        icon: Icon(
+                                          Icons.add,
+                                          size: 20,
+                                        ))
+                                  ],
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                );
-              },
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  );
+                },
+              ),
             ),
             Container(
               padding: EdgeInsets.only(left: 20, right: 20),

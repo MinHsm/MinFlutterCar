@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:min_shop_app/module/data.dart';
+import 'package:min_shop_app/pages/order_page.dart';
 
 class PaymentPage extends StatefulWidget {
   final List<FoodItem> cartItems;
@@ -129,7 +130,19 @@ class _PaymentPageState extends State<PaymentPage> {
           Container(
             width: 250,
             height: 45,
-            child: ElevatedButton(onPressed: () {}, child: Text('支付')),
+            child: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => OrderPage(
+                                cartItems: widget.cartItems,
+                                date: widget.date,
+                                seatType: widget.seatType,
+                                timeSlot: widget.timeSlot,
+                              )));
+                },
+                child: Text('支付')),
           )
         ],
       ),
