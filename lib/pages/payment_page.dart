@@ -132,6 +132,7 @@ class _PaymentPageState extends State<PaymentPage> {
             height: 45,
             child: ElevatedButton(
                 onPressed: () {
+                  _timer.cancel();
                   Navigator.push(
                       context,
                       MaterialPageRoute(

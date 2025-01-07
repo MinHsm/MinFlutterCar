@@ -41,6 +41,12 @@ class _OrderPageState extends State<OrderPage> {
       appBar: AppBar(
         title: Text('OrderPage'),
         backgroundColor: Colors.blue,
+        leading: IconButton(
+            onPressed: () {
+              Navigator.popUntil(
+                  context, (router) => router.settings.name == '/foodPage');
+            },
+            icon: Icon(Icons.arrow_back)),
       ),
       body: Column(
         children: [
@@ -100,11 +106,17 @@ class _OrderPageState extends State<OrderPage> {
             height: 20,
           ),
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Container(
                 width: 120,
                 height: 40,
-                child: ElevatedButton(onPressed: () {}, child: Text('完成')),
+                child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.popUntil(context,
+                          (router) => router.settings.name == '/foodPage');
+                    },
+                    child: Text('完成')),
               ),
               Text(
                 '总计' + totalAmount.toStringAsFixed(2),

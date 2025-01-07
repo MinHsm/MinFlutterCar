@@ -144,7 +144,8 @@ class _UserPageState extends State<UserPage> {
                             builder: (context) => FoodPage(
                                 date: selectDate!,
                                 seatType: seatValue!,
-                                timeSlot: timeValue!)));
+                                timeSlot: timeValue!),
+                        settings: RouteSettings(name: '/foodPage')));
                   } else {
                     ScaffoldMessenger.of(context)
                         .showSnackBar(SnackBar(content: Text('请完成所有选择')));
